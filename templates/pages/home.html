@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/css/index.css">
+
+{% endblock %}
+
+{% block main %}
+    <header>
+        <div>
+            <h2>Christopher's portfolio</h2>
+            <br>
+            <a href="/projects">See Projects</a>
+        </div>
+        <img id="header_img" alt="header-img-hogeschool-leiden" src="/static/img/header_image.jpg">
+    </header>
+    
+    <div id="intro-container">
+        <div id="intro-wrapper">
+            <h3>Who am I?</h3>
+            <p>
+                My name is Christopher Garcia. 
+                At the moment, I am 22 years old. 
+                Currently, I am studying Bio Informatics at Hogeschool Leiden.
+                I have experience in Full Stack Web Development,
+                but i enjoy backend development more. 
+            </p>
+        </div>
+    </div>
+    <div id="content-container">
+        <div id="text-wrapper">
+            <p>
+                This study interests me because I get to study God's creation.
+                Besides this, I also have a love for programming
+            </p>
+        </div>
+        <div id="image-wrapper">
+
+        </div>
+    </div>
+
+{% endblock %}
