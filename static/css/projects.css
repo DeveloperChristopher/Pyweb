@@ -17,10 +17,26 @@
 .project-link {
     text-decoration: none;
     color: black;
+    width: max-content;
+    height: max-content;
+    margin: 20px;
 }
 
 .project-card {
     width: 300px;
-    height: 200px;
-    margin: 20px;
+    height: 220px;
+}
+
+.project-card h2 {
+    padding: 7px;
+}
+
+.header-img {
+    height: 175px;
+    width: 100%;
+}
+
+.header-img img{
+    height: 100%;
+    width: 100%;
 }

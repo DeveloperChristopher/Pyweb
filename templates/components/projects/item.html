@@ -1,7 +1,7 @@
-<a href="/projects/{{ project.id }}" class="project-link">
+<a href="/projects/{{ project[0] }}" class="project-link">
     <div class="project-card">
         <div class="header-img">
-            <img src="{{ project[0] }}" alt="{{ project[1] }}-image">
+            <img src="/static/img/projects/{{ project[0] }}.webp" alt="{{ project[1] }}-image">
         </div>
         <h2>{{ project[1] }}</h2>
     </div>
