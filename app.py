@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -18,9 +18,14 @@ def projects():  # put application's code here
                            ])
 
 
-@app.route('/contact')
-def contact():  # put application's code here
-    return render_template("pages/contact.html")
+@app.route('/contact', methods=['GET', 'POST'])
+def contact(): 
+    form_data = request.form
+    page = "form" # put application's code here
+    if request.method == 'POST':
+        page = "data"
+    print(form_data)
+    return render_template("pages/contact.html", page=page, form_data=form_data)
 
 if __name__ == '__main__':
     app.run()
