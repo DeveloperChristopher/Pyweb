@@ -1,22 +1,23 @@
 from flask import Flask, render_template, request
+from project import Project
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def index():  # put application's code here
+def index():
     return render_template("pages/home.html")
 
 @app.route('/projects')
-def projects():  # put application's code here
-    return render_template("pages/projects/index.html", projects=
-                           [
-                               ["111111111", "BPGRU", "Description of project 1"],
-                               ["222222222", "BPYT1", "Description of project 2"],
-                               ["333333333", "Project: Introductie", "Description of project 3"],
-                               ["444444444", "BPGAA", "Description of project 4"]
-                           ])
+def projects():
+    project = Project()
+    print(project.read_all())
+    return render_template("pages/projects/index.html")
 
+@app.route('/project')
+def project():
+    form_data = request.args
+    return render_template("pages/projects/show.html")
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact(): 

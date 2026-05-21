@@ -1,0 +1,10 @@
+#project-container {
+    width: 100%;
+    height: min-content;
+}
+
+#project-wrapper {
+    width: 400px;
+    height: min-content;
+    padding: 20px;
+}
