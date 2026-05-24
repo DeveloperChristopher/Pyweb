@@ -13,10 +13,16 @@
 <!-- Pagina is ook geschreven met AI -->
     <div id="project-container">
         <div id="project-wrapper">
-            <div id="header-img"></div>
-            <h2></h2>
-            <p></p>
-            <button></button>
+            <div id="header-img">
+                <img src="/static/img/projects/{{project[0][0]}}.webp" alt="" srcset="">
+            </div>
+            <h2>{{ project[0][1] }}</h2>
+            <p>{{ project[0][2] }}</p>
+            <div id="download-container">
+                <a href="/static/projects/{{project[0][0]}}.zip" id="download-btn">
+                    <button>Download</button>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}

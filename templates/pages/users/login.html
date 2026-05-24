@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/css/login.css">
+
+{% endblock %}
+
+{% block main %}
+<div id="login-container">
+    <div id="login-wrapper">
+        <h2>Login</h2>
+        <form action="/authenticate" method="post">
+            <input type="text" name="username" placeholder="Username" id=""><br>
+            <input type="password" name="password" placeholder="Password" id=""><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+{% endblock %}
