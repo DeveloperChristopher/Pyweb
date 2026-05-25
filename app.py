@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from project import Project
 
 app = Flask(__name__)
@@ -31,12 +31,18 @@ def contact():
     page = "form" # put application's code here
     if request.method == 'POST':
         page = "data"
-    print(form_data)
     return render_template("pages/contact.html", page=page, form_data=form_data)
 
 @app.route('/login')
 def login(): 
     return render_template("pages/users/login.html")
+
+@app.route("/authenticate", methods=['POST'])
+def authenticate():
+    form_data = request.form
+    print(form_data["password"])
+    return redirect("/")
+    
 
 if __name__ == '__main__':
     app.run()
