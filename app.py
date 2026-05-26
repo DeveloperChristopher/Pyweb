@@ -17,6 +17,15 @@ def get_projects_db():
 def projects():
     return render_template("pages/projects/index.html", projects=get_projects_db())
 
+@app.route('/create/project')
+def create_project():
+    return render_template("pages/projects/create.html")
+
+@app.route('/update/project')
+def update_project():
+    form_data = request.args
+    return render_template("pages/projects/update.html", project=get_project_db(form_data["id"]))
+
 def get_project_db(id):
     project = Project()
     return project.read_id(id)

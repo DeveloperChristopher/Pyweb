@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Project Create 
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/css/form.css">
+
+{% endblock %}
+
+{% block main %}
+    <div id="container">
+        <div id="wrapper">
+        <h2>Create Project</h2>
+        <form action="/store/project" method="post" enctype="multipart/form-data">
+            <label for="">Photo</label>
+            <input type="file" name="image" id="">
+            <input type="text" name="title" placeholder="Title" id="">
+            <textarea name="body" placeholder="body" id=""></textarea>
+            <label for="">Project</label>
+            <input type="file" name="project" id="">
+            <input type="submit" value="create">
+        </form>
+        {% for msg in get_flashed_messages() %}
+            <p class="flash">{{ msg }}</p>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

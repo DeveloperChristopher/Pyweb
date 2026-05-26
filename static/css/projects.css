@@ -41,3 +41,15 @@
     height: 100%;
     width: 100%;
 }
+
+li {
+    list-style: none;
+}
+
+.project-btn {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 7px;
+    border-radius: 7px;
+}

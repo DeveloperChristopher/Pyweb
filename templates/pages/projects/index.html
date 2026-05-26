@@ -13,10 +13,8 @@
 <!-- Pagina is ook geschreven met AI -->
     <div id="project-container">
         <div id="project-wrapper">
-            {% if not session["user_id"] %}
-                <li><a href="/login" id="login-btn">Login</a></li>
-            {% else %}
-                <li><a href="/logout">logout</a></li>
+            {% if session["user_id"] %}
+                <li><a href="/create/project" class="project-btn">Create Project</a></li>
             {% endif %}
 
             {% include "components/projects/list.html" %}
