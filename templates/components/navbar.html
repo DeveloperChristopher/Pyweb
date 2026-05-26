@@ -6,6 +6,10 @@
         <li><a href="/">Home</a></li>
         <li><a href="/projects">Projects</a></li>
         <li><a href="/contact">Contact</a></li>
-        <li><a href="/login" id="login-btn">Login</a></li>
+        {% if not session["user_id"] %}
+            <li><a href="/login" id="login-btn">Login</a></li>
+        {% else %}
+            <li><a href="/logout">logout</a></li>
+        {% endif %}
     </ul>
 </nav>

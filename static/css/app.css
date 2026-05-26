@@ -84,3 +84,8 @@ footer ul {
 footer p {
     text-align: center;
 }
+
+.flash {
+    color: red;
+    text-align: center;
+}

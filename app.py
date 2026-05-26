@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash, session
 from project import Project
+from user import User
 
 app = Flask(__name__)
 app.secret_key = "asohdj asoxcvncxvmn"
@@ -34,15 +35,32 @@ def contact():
     return render_template("pages/contact.html", page=page, form_data=form_data)
 
 @app.route('/login')
-def login(): 
+def login():
     return render_template("pages/users/login.html")
+
+def authenticate_user(username, password):
+    user = User()
+    user_data = user.read_username(username)
+    if len(user_data) == 0:
+        flash("Username or password is incorrect")
+        return redirect("/login")
+    else:
+        if user_data[0][2] == password:
+            session["user_id"] = user_data[0][0]
+            return redirect("/")
+        else:
+            flash("Username or password is incorrect")
+            return redirect("/login")
 
 @app.route("/authenticate", methods=['POST'])
 def authenticate():
     form_data = request.form
-    print(form_data["password"])
-    return redirect("/")
+    return authenticate_user(form_data["username"], form_data["password"])
     
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
 
 if __name__ == '__main__':
     app.run()
