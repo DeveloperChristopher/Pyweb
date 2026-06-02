@@ -1,9 +1,17 @@
 from flask import Flask, render_template, request, redirect, flash, session
+from werkzeug.utils import secure_filename
 from project import Project
 from user import User
 
+UPLOAD_FOLDER_IMG = "/static/img/projects"
+UPLOAD_FOLDER_PROJECTS = "/static/projects"
+
 app = Flask(__name__)
 app.secret_key = "asohdj asoxcvncxvmn"
+
+app.config["UPLOAD_FOLDER_IMG"] = UPLOAD_FOLDER_IMG
+app.config["UPLOAD_FOLDER_PROJECTS"] = UPLOAD_FOLDER_PROJECTS
+
 
 @app.route('/')
 def index():
@@ -21,14 +29,28 @@ def projects():
 def create_project():
     return render_template("pages/projects/create.html")
 
-@app.route('/update/project')
-def update_project():
-    form_data = request.args
-    return render_template("pages/projects/update.html", project=get_project_db(form_data["id"]))
+def store_project_db(title, body):
+    project = Project()
+    return project.create(title, body)
+
+@app.route('/store/project', methods=['POST'])
+def store_project():
+    form_data = request.form
+    print(store_project_db(form_data["title"], form_data["body"]))
+    # file_img = request.files["image"]
+    # file_zip = request.files["project"]
+    # file_img.save("static/img/projects/")
+    # file_zip.save("static/project/{}")
+    return redirect("/projects")
 
 def get_project_db(id):
     project = Project()
     return project.read_id(id)
+
+@app.route('/update/project')
+def update_project():
+    form_data = request.args
+    return render_template("pages/projects/update.html", project=get_project_db(form_data["id"]))
 
 @app.route('/project')
 def project():

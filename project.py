@@ -4,9 +4,8 @@ class Project(Database):
     def __init__(self):
         super().__init__()
 
-    # def create(self, id, title, body):
-    #     self.cursor.execute(f"INSERT INTO projects VALUES ('{id}', '{title}', '{body}')")
-    #     self.conn.commit()
+    def create(self, title, body):
+        return super().create("projects", ["title", "body"], [title, body])
 
     def read_all(self):
         return super().read("projects")
