@@ -4,7 +4,6 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 #project-wrapper {
@@ -13,6 +12,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
+    margin-top: 125px;
 }
 
 .project-link {
@@ -44,6 +44,8 @@
 
 li {
     list-style: none;
+    width: 100%;
+    margin: 20px;
 }
 
 .project-btn {

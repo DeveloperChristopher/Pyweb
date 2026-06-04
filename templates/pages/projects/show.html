@@ -16,7 +16,7 @@
             {% if session["user_id"] %}
                 <ul id="btn-list">
                     <li><a href="/update/project?id={{project[0][0]}}" class="project-btn">Update Project</a></li>
-                    <li><a href="/delete/project" class="project-btn">Delete Project</a></li>
+                    <li><a href="/delete/project?id={{project[0][0]}}" class="project-btn">Delete Project</a></li>
                 </ul>
             {% endif %}
             <div id="header-img">

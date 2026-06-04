@@ -1,5 +1,5 @@
+import os
 from flask import Flask, render_template, request, redirect, flash, session
-from werkzeug.utils import secure_filename
 from project import Project
 from user import User
 
@@ -9,53 +9,83 @@ UPLOAD_FOLDER_PROJECTS = "/static/projects"
 app = Flask(__name__)
 app.secret_key = "asohdj asoxcvncxvmn"
 
-app.config["UPLOAD_FOLDER_IMG"] = UPLOAD_FOLDER_IMG
-app.config["UPLOAD_FOLDER_PROJECTS"] = UPLOAD_FOLDER_PROJECTS
-
 
 @app.route('/')
 def index():
     return render_template("pages/home.html")
 
+
 def get_projects_db():
     project = Project()
     return project.read_all()
 
-@app.route('/projects', methods=['GET', 'POST'])
+
+@app.route('/projects', methods=['GET'])
 def projects():
     return render_template("pages/projects/index.html", projects=get_projects_db())
+
 
 @app.route('/create/project')
 def create_project():
     return render_template("pages/projects/create.html")
 
+
 def store_project_db(title, body):
     project = Project()
     return project.create(title, body)
 
+
 @app.route('/store/project', methods=['POST'])
 def store_project():
     form_data = request.form
-    print(store_project_db(form_data["title"], form_data["body"]))
-    # file_img = request.files["image"]
-    # file_zip = request.files["project"]
-    # file_img.save("static/img/projects/")
-    # file_zip.save("static/project/{}")
+    project_id = store_project_db(form_data["title"], form_data["body"])
+    request.files["image"].save(f"static/img/projects/{project_id}.webp")
+    request.files["project"].save(f"static/projects/{project_id}.zip")
     return redirect("/projects")
+
 
 def get_project_db(id):
     project = Project()
     return project.read_id(id)
 
-@app.route('/update/project')
+
+def edit_project_db(id, columns, values):
+    project = Project()
+    project.update(id, columns, values)
+
+
+@app.route('/edit/project', methods=['POST'])
+def edit_project():
+    form_data = request.form
+    edit_project_db(form_data["id"], ["title", "body"], [form_data["title"], form_data["body"]])
+    return redirect("/projects")
+
+
+@app.route('/update/project', methods=['GET'])
 def update_project():
     form_data = request.args
     return render_template("pages/projects/update.html", project=get_project_db(form_data["id"]))
 
-@app.route('/project')
+
+def delete_project_db(id):
+    project = Project()
+    project.delete_id(id)
+
+
+@app.route('/delete/project', methods=['GET'])
+def delete_project():
+    form_data = request.args
+    os.remove(f"static/img/projects/{form_data["id"]}.webp")
+    os.remove(f"static/projects/{form_data["id"]}.zip")
+    delete_project_db(form_data["id"])
+    return redirect("/projects")
+
+
+@app.route('/project', methods=['GET'])
 def project():
     form_data = request.args
     return render_template("pages/projects/show.html", project=get_project_db(form_data["id"]))
+
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact(): 
@@ -65,9 +95,11 @@ def contact():
         page = "data"
     return render_template("pages/contact.html", page=page, form_data=form_data)
 
+
 @app.route('/login')
 def login():
     return render_template("pages/users/login.html")
+
 
 def authenticate_user(username, password):
     user = User()
@@ -83,15 +115,18 @@ def authenticate_user(username, password):
             flash("Username or password is incorrect")
             return redirect("/login")
 
+
 @app.route("/authenticate", methods=['POST'])
 def authenticate():
     form_data = request.form
     return authenticate_user(form_data["username"], form_data["password"])
     
+
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
+
 
 if __name__ == '__main__':
     app.run()

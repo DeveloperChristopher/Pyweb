@@ -13,8 +13,8 @@ class Project(Database):
     def read_id(self, id):
         return super().read("projects", f"WHERE `id` = {id}")
 
-    # def update(self):
-    #     pass
+    def update(self, id, column, values):
+        return super().update("projects", column, values, f"WHERE `id` = {id}")
 
-    # def delete(self):
-    #     pass
+    def delete_id(self, id):
+        return super().delete("projects", f"WHERE `id` = {id}")

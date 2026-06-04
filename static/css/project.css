@@ -40,12 +40,12 @@
     height: 400px
 }
 
-h2 {
+#project-wrapper h2 {
     text-align: center;
     margin-top: 50px;
 }
 
-p {
+#project-wrapper p {
     margin: 50px;
 }
 

@@ -13,14 +13,11 @@
     <div id="container">
         <div id="wrapper">
         <h2>Update Project</h2>
-        <form action="/store/project" method="post" enctype="multipart/form-data">
-            <label for="">Photo</label>
-            <input type="file" name="image" id="">
-            <input type="text" name="title" placeholder="Title" value="{{project[0][1]}}" id="">
-            <textarea name="body" placeholder="body" id="">{{project[0][2]}}</textarea>
-            <label for="">Project</label>
-            <input type="file" name="project" id="">
-            <input type="submit" value="Create">
+        <form action="/edit/project" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{{project[0][0]}}">
+            <input type="text" name="title" placeholder="Title" value="{{project[0][1]}}" id="" required>
+            <textarea name="body" placeholder="body" id="">{{project[0][2]}}</textarea required>
+            <input type="submit" value="Update Project">
         </form>
         {% for msg in get_flashed_messages() %}
             <p class="flash">{{ msg }}</p>
