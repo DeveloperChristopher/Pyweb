@@ -47,6 +47,7 @@
 
 #project-wrapper p {
     margin: 50px;
+    word-wrap: break-word;
 }
 
 #download-container {

@@ -20,7 +20,7 @@
                     <input type="tel" name="phonenumber" id="" placeholder="Phone Number" required><br>
                     <select name="reason" id="">
                         <option disabled selected>Reason for message</option>
-                        <option value="mistake">I found a mistake</option>
+                        <option value="I found a mistake">I found a mistake</option>
                     </select><br>
                     <input type="file" name="files" id=""><br>
                     <textarea name="body" id="" placeholder="Body" required></textarea>
@@ -36,8 +36,6 @@
                 <p>{{ form_data.phonenumber }}</p>
                 <label for="">Reason for message</label>
                 <p>{{ form_data.reason }}</p>
-                <label for="">File</label>
-                <p>{{ form_data.name }}</p>
                 <label for="">Message</label>
                 <p>{{ form_data.body }}</p>
             {% endif %}

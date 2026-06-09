@@ -4,8 +4,8 @@ class Project(Database):
     def __init__(self):
         super().__init__()
 
-    def create(self, title, body):
-        return super().create("projects", ["title", "body"], [title, body])
+    def create(self, title, body, img_type):
+        return super().create("projects", ["title", "body", "img_type"], [title, body, img_type])
 
     def read_all(self):
         return super().read("projects")
